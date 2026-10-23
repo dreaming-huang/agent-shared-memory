@@ -138,4 +138,4 @@ collector ◄──ssh inbox──  server-* / server-workstation
 
 ## 许可
 
-[MIT](LICENSE) © YOUR_GITHUB_USER / contributors
+[MIT](LICENSE) © dreaming-huang / contributors

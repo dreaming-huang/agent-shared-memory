@@ -138,4 +138,4 @@ Without shared memory, each new agent re-discovers the same pitfalls and paths. 
 
 ## License
 
-[MIT](LICENSE) © YOUR_GITHUB_USER / contributors
+[MIT](LICENSE) © dreaming-huang / contributors
