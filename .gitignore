@@ -1,0 +1,45 @@
+# Local / machine-specific
+config.env
+.env
+.env.*
+!.env.example
+!config.example.env
+
+# Secrets & credentials — never commit
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+*.credentials
+.git-credentials
+**/secrets/
+**/credentials/
+
+# Private mirrors / local clones of real memory (keep template only)
+memory_private/
+private/
+.real-memory/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+!.cursor/rules/
+
+# Logs & temp
+*.log
+/tmp/
+__pycache__/
+*.pyc
+
+# Collected inbox staging (local only; template keeps .gitkeep)
+_inbox/*.md
+!_inbox/.gitkeep
+memory_inbox/*.md
+!memory_inbox/README.md
+memory_inbox/done/

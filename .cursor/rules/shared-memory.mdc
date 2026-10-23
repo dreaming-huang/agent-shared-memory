@@ -1,0 +1,16 @@
+---
+description: Pointer to shared-memory rules (mirror). Read AGENTS.md + SERVER.md before writing memory.
+globs:
+alwaysApply: false
+---
+
+# Shared memory (pointer)
+
+When the user asks to read or write **shared memory**, or you finish durable work that should be remembered:
+
+1. Open the **mirror** checkout: `$MIRROR_ROOT` (see local `config.env` / env).
+2. Follow `$MIRROR_ROOT/AGENTS.md` (all agents) and `$MIRROR_ROOT/SERVER.md` (this host).
+3. On servers: write **only** to `$MEMORY_INBOX` as a new `.md`; never commit inside the mirror.
+4. Never store tokens, passwords, or private keys in memory files.
+
+This rule is a short pointer only — do not duplicate full policy here.
