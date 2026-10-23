@@ -7,11 +7,11 @@
 | 类别 | 示例（应替换为） |
 |------|------------------|
 | 人名 / GitHub / 账号 | → `YOUR_GITHUB_USER` / `yourname` |
-| 主机别名 / 集群名 | → `workstation` / `gpu-cluster-a` / `gpu-cluster-b` / `gpu-workstation` / `jump-a` |
+| 主机别名 / 集群名 | → `workstation` / `server-a` / `server-b` / `server-workstation` / `jump-a` |
 | 绝对路径（盘符、集群 FS、家目录用户段） | → `$SHARED_MEMORY_ROOT` / `$MEMORY_INBOX` / `$MIRROR_ROOT` |
 | IP、内网域名、跳板原文 | → SSH `Host` 别名占位符 |
 | Token、密码、私钥、`.git-credentials`、cookie | → **删除**；改用本地 secret store |
-| 真实项目名与研究结论 | → 虚构 `demo/hello-memory` 或通用占位 |
+| 真实项目名与研究结论 | → 虚构 `demo/hello-memory` / `demo/acme-cli` 或通用占位 |
 
 ## 提交前命令 / Pre-commit scan
 

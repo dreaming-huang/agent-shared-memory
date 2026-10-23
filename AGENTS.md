@@ -58,7 +58,7 @@ device: workstation
 - 平时只能在已有领域下新建项目（建 `SUMMARY.md` 并在 MEMORY.md 加一行）；都不合适写到 `_inbox/`（服务器写到 `$MEMORY_INBOX`），`domain: 待定`。
 - 只有用户要求「整理记忆」并开新领域时，被叫来的 agent（任何工具）才新建领域：建 `SUMMARY.md`、MEMORY.md 加一行，移动用 `git mv` 并修正链接。
 - 「整理记忆」：把 `_inbox/` 归类，新事件合并进 SUMMARY / `_facts/`，检查矛盾；同一时间只在一台设备上整理。
-- **项目别名（示例）**：`hello` = `hello-memory` → `demo/hello-memory/`（`domain: demo`）。按需在本地维护自己的别名表，勿把私人项目名提交到公开 fork。
+- **项目别名（示例）**：`hello` = `hello-memory` → `demo/hello-memory/`；`acme` = `acme-cli` → `demo/acme-cli/`（均 `domain: demo`）。按需在本地维护自己的别名表，勿把私人项目名提交到公开 fork。
 
 ## Frontmatter 模板
 
@@ -72,7 +72,7 @@ links: [相对路径]
 created: YYYY-MM-DD HH:MM
 modified: YYYY-MM-DD HH:MM
 source_agent: Cursor|Codex|Grok|other
-device: workstation|laptop|gpu-cluster-a|gpu-cluster-b|gpu-workstation|...
+device: workstation|laptop|server-a|server-b|server-workstation|...
 # 仅事实可选: superseded_by: 路径 / valid_until: YYYY-MM-DD
 ---
 ```

@@ -1,8 +1,8 @@
 # memory_inbox — 服务器收件箱说明模板
 
-把本文件复制到每台 GPU / 远程主机的 `$MEMORY_INBOX/`（目录名可自定，与 `config.env` 一致即可）。
+把本文件复制到每台远程服务器主机的 `$MEMORY_INBOX/`（目录名可自定，与 `config.env` 一致即可）。
 
-## 给 server agent 的短说明
+## 给 server agent / 服务器 agent 的短说明
 
 1. **先读**镜像里的 `AGENTS.md` + `SERVER.md`（路径：`$MIRROR_ROOT`）。
 2. **只在本目录新建** `YYYY-MM-DD_HHMM_简短描述.md`（一事一文件）。
@@ -29,7 +29,7 @@ links: []
 created: YYYY-MM-DD HH:MM
 modified: YYYY-MM-DD HH:MM
 source_agent: Cursor|Codex|Grok|other
-device: gpu-cluster-a|gpu-cluster-b|gpu-workstation
+device: server-a|server-b|server-workstation
 domain: 待定
 project: ""
 ---

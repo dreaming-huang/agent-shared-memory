@@ -3,12 +3,16 @@ type: reference
 tags: [rules, collector]
 links: [AGENTS.md, SERVER.md]
 created: 2026-01-01 12:00
-modified: 2026-01-01 12:00
+modified: 2026-02-13 12:00
 source_agent: template
 device: workstation
 ---
 
 # 收取流程 / Collector Playbook
+
+> **Template note** · Host names below (`server-a`, `server-b`, `server-workstation`, `jump-a`) are placeholders. Wire **your** SSH Host aliases and paths in local `config.env` before the first collect — see [README.md](README.md) **This is a TEMPLATE**.
+>
+> **模板说明** · 下文主机名均为占位符。首次收取前请在本地 `config.env` 填入你自己的 SSH Host 别名与路径——见 [README.md](README.md)「这是一份模板」。
 
 在 **workstation**（或你指定的 collector 主机）上运行。主机与路径全部使用占位符 / 环境变量（见 `config.example.env`）。
 
@@ -17,12 +21,12 @@ device: workstation
 - 建议每小时第 **47** 分定时收取（服务器镜像 pull 建议第 **17** 分）；用户说「收记忆」/ *collect memory* 时也收。
 - 写入侧配对：各 bot 每小时第 **35** 分巡检，有新的持久结论 / 决定 / 踩坑 / 关键路径才写收件箱（workstation `_inbox/` 或服务器 `$MEMORY_INBOX_*`），无新内容不写、不 commit/push；工作刚完成时也可立刻写。
 - 来源：
-  - `$MEMORY_INBOX_A`（`gpu-cluster-a`，经 `SSH_HOST_A`，例：`ssh jump-a`）
-  - `$MEMORY_INBOX_B`（`gpu-cluster-b`，经 `SSH_HOST_B`）
-  - `$MEMORY_INBOX_W`（`gpu-workstation`，经 `SSH_HOST_W`）
+  - `$MEMORY_INBOX_A`（`server-a`，经 `SSH_HOST_A`，例：`ssh jump-a`）
+  - `$MEMORY_INBOX_B`（`server-b`，经 `SSH_HOST_B`）
+  - `$MEMORY_INBOX_W`（`server-workstation`，经 `SSH_HOST_W`）
   - 以及仓库根 `_inbox/`
   - 只取新 `.md`，排除 `README.md` 与 `done/`
-- SSH：只用 `~/.ssh/config` 里的 **Host 别名**（如 `jump-a`、`gpu-cluster-b`、`gpu-workstation`）。文档与脚本中**不要**写真实 IP。
+- SSH：只用 `~/.ssh/config` 里的 **Host 别名**（如 `jump-a`、`server-b`、`server-workstation`）。文档与脚本中**不要**写真实 IP。
 
 ## 步骤 / Steps
 
@@ -62,7 +66,7 @@ device: workstation
 
 ## 镜像自拉取 / Mirror self-pull
 
-各 GPU 主机的 `$MIRROR_ROOT_*` 应自行配置远程凭据（机器本地，**勿**写入本仓库）与 cron（如每小时第 17 分 `git pull --ff-only`）。collector **不必**再 bundle 推送到镜像。保持镜像工作区可写（否则 pull 可能失败）；不要额外改成整树只读除非你有其它同步方案。
+各远程服务器主机的 `$MIRROR_ROOT_*` 应自行配置远程凭据（机器本地，**勿**写入本仓库）与 cron（如每小时第 17 分 `git pull --ff-only`）。collector **不必**再 bundle 推送到镜像。保持镜像工作区可写（否则 pull 可能失败）；不要额外改成整树只读除非你有其它同步方案。
 
 ## 改规则 / Changing rules
 

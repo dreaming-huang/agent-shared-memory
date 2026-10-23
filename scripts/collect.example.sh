@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # collect.example.sh — EXAMPLE collector sketch (not production-ready).
 # 示例收取脚本：替换占位符后自测；不要把真实 Host / 路径提交回公开模板。
+# Labels use server-* placeholders (server-a / server-b / server-workstation).
 #
 # Usage:
 #   cp config.example.env config.env   # edit locally
@@ -11,8 +12,8 @@ set -euo pipefail
 
 : "${SHARED_MEMORY_ROOT:?set SHARED_MEMORY_ROOT in config.env}"
 : "${SSH_HOST_A:=jump-a}"
-: "${SSH_HOST_B:=gpu-cluster-b}"
-: "${SSH_HOST_W:=gpu-workstation}"
+: "${SSH_HOST_B:=server-b}"
+: "${SSH_HOST_W:=server-workstation}"
 : "${MEMORY_INBOX_A:=/data/memory_inbox}"
 : "${MEMORY_INBOX_B:=/share/memory_inbox}"
 : "${MEMORY_INBOX_W:=$HOME/memory_inbox}"
@@ -36,9 +37,9 @@ fetch_inbox() {
   echo "    (example only — implement scp/rsync/base64 transfer here)"
 }
 
-fetch_inbox "$SSH_HOST_A" "$MEMORY_INBOX_A" "gpu-cluster-a"
-fetch_inbox "$SSH_HOST_B" "$MEMORY_INBOX_B" "gpu-cluster-b"
-fetch_inbox "$SSH_HOST_W" "$MEMORY_INBOX_W" "gpu-workstation"
+fetch_inbox "$SSH_HOST_A" "$MEMORY_INBOX_A" "server-a"
+fetch_inbox "$SSH_HOST_B" "$MEMORY_INBOX_B" "server-b"
+fetch_inbox "$SSH_HOST_W" "$MEMORY_INBOX_W" "server-workstation"
 
 echo "==> 3. organize (human/agent step — NOT automated here)"
 echo "    - denoise: drop PID/ETA/progress noise"
