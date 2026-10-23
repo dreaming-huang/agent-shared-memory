@@ -22,7 +22,11 @@ Do **not** treat filling `config.env` as a manual checklist for the human as the
 
 ## Why
 
-Agents on different machines forget each other. This template gives them:
+Frontier LLMs keep getting smarter; raw model IQ is a moving target that always catches up. What does not catch up on its own is the work context you already paid for—decisions, pitfalls, and key paths discovered across tools and machines.
+
+Relying on one agent's built-in or product-local memory is inconvenient: that memory usually does not span tools or hosts (workstation ↔ remote servers). Add a new server, a new agent, or a new host, and you redo discovery from scratch.
+
+This template puts durable conclusions, decisions, pitfalls, and key paths in a Git-backed shared store agents can read and write across ends—so intelligence upgrades do not erase institutional memory. It gives them:
 
 | Role | What they do |
 |------|----------------|
@@ -85,7 +89,7 @@ Do **not** put this repo inside a working project tree (agents may auto-load it 
 
 ## Memory effect
 
-Without shared memory, each new agent re-discovers the same pitfalls and paths. With this skill + collector, durable conclusions land in each project's `SUMMARY.md`. Saying 「读共享记忆」 on a *new* agent loads `MEMORY.md` → relevant `SUMMARY.md` → only then `events/` — so they inherit decisions, key paths, and pitfalls instead of starting from zero. See **`demo/acme-cli/`** for what a matured project memory looks like after a few days of cross-host use; **`demo/hello-memory/`** is only the minimal file shape.
+Without shared memory, each new agent re-discovers the same pitfalls and paths. With this skill + collector, durable conclusions land in each project's `SUMMARY.md`. Saying 「读共享记忆」 on a *new* agent loads `MEMORY.md` → relevant `SUMMARY.md` → only then `events/` — so they inherit decisions, key paths, and pitfalls instead of starting from zero. That is the practical payoff of the [Why](#why) above: institutional memory survives smarter models and new hosts. See **`demo/acme-cli/`** for what a matured project memory looks like after a few days of cross-host use; **`demo/hello-memory/`** is only the minimal file shape.
 
 ---
 
