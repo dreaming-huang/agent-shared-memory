@@ -10,13 +10,13 @@ device: workstation
 
 # 服务器 agent 规则 / Server Agent Rules
 
-> **Template note** · This file uses placeholder host aliases (`server-a`, `server-b`, `server-workstation`, `jump-a`) and env vars only. Fill **your** paths in local `config.env` and tell your server agents to follow this file — see the **This is a TEMPLATE** section in [README.md](README.md).
+> **Template note** · This file uses placeholder host aliases (`server-a`, `server-b`, `server-workstation`, `jump-a`) and env vars only. **Tell your server agents** to copy `config.example.env` → `config.env`, complete real paths / Host aliases, and follow this file — see [README.md](README.md) / [README.zh.md](README.zh.md) (**This is a TEMPLATE**).
 >
-> **模板说明** · 本文仅含主机别名占位符与环境变量。请在本地 `config.env` 填入真实路径，并让你的 **server agent / 服务器 agent** 遵守本文件——详见 [README.md](README.md) 顶部的「这是一份模板」。
+> **模板说明** · 本文仅含主机别名占位符与环境变量。请**告诉你的 server / 服务器 agent** 把 `config.example.env` 复制为 `config.env`、填完真实路径与 Host 别名，并遵守本文件——详见 [README.md](README.md) / [README.zh.md](README.zh.md)「这是一份模板」。
 
 先读通用规则 [AGENTS.md](AGENTS.md)（记什么 / 不记什么、默认写、按需读、领域与别名）。本文件只写**服务器特有**部分。
 
-路径一律用环境变量或占位符；在 `config.env`（由 `config.example.env` 复制）中填写真实值，**不要**把真实绝对路径或主机名写回本文件后公开发布。
+路径一律用环境变量或占位符；由 **server agent** 在 `config.env`（从 `config.example.env` 复制）中填写真实值，**不要**把真实绝对路径或主机名写回本文件后公开发布。
 
 ## 只读镜像 / Read-only mirror
 

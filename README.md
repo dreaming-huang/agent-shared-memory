@@ -1,28 +1,26 @@
-# Shared Memory for Agents / 跨端跨工具共享记忆
+# Shared Memory for Agents
 
-**English** · A lightweight, Git-backed shared memory template so Cursor, Codex, Grok Bot, and other agents can read and write durable conclusions across workstations and remote servers—without stuffing secrets into the repo.
+**English** · [中文](README.zh.md)
 
-**中文** · 一套基于 Git 的轻量共享记忆开源模板：让 Cursor / Codex / Grok Bot 等 agent 在工作站与远程服务器之间共享「结论、决定、踩坑、关键路径」，且**永不把密钥写进仓库**。
+A lightweight, Git-backed shared memory template so Cursor, Codex, Grok Bot, and other agents can read and write durable conclusions across workstations and remote servers—without stuffing secrets into the repo.
 
 > License: **MIT** · Status: template / starter · Demo: `demo/hello-memory` (format) · `demo/acme-cli` (worked memory effect)
 
 ---
 
-## This is a TEMPLATE / 这是一份模板
+## This is a TEMPLATE
 
-**English** · This repository ships **placeholders only**. Before it is useful you must:
+This repository ships **placeholders only**. The human’s job is mainly to **clone**, then **instruct each agent** (profile / system prompt / Cursor rule / chat) to finish the wiring. Tell your agents to:
 
-1. Tell **each of your agents** (profile / system prompt / Cursor rule) to follow **[AGENTS.md](AGENTS.md)** (plus **[SERVER.md](SERVER.md)** on remote hosts, **[COLLECTOR.md](COLLECTOR.md)** on the collector) and to install `skills/shared-memory-manager`.
-2. Copy `config.example.env` → `config.env` (gitignored) and fill **your** paths, inbox locations, and SSH **Host** aliases — the names `server-a` / `server-b` / `server-workstation` / `jump-a` are examples, not real hosts.
+1. Follow **[AGENTS.md](AGENTS.md)** (plus **[SERVER.md](SERVER.md)** on remote hosts, **[COLLECTOR.md](COLLECTOR.md)** on the collector).
+2. Install `skills/shared-memory-manager`.
+3. **Copy `config.example.env` → `config.env` (gitignored) and complete** real paths, inbox locations, and SSH **Host** aliases — the names `server-a` / `server-b` / `server-workstation` / `jump-a` are examples, not real hosts. Agents should ask you only for facts they cannot discover (e.g. which Host alias maps to which machine).
 
-**中文** · 本仓库只提供占位符。真正可用前你必须：
-
-1. 让**每一个**自己的 agent（profile / system prompt / Cursor rule）遵守 **[AGENTS.md](AGENTS.md)**（远程主机再读 **[SERVER.md](SERVER.md)**，收取端再读 **[COLLECTOR.md](COLLECTOR.md)**），并安装 `skills/shared-memory-manager`。
-2. 复制 `config.example.env` → `config.env`（已 gitignore），填入**你自己的**路径、收件箱与 SSH Host 别名——`server-a` / `server-b` / `server-workstation` / `jump-a` 只是示例，不是真实主机。
+Do **not** treat filling `config.env` as a manual checklist for the human as the primary step — **tell your agent to complete configuration**.
 
 ---
 
-## Why / 为什么需要
+## Why
 
 Agents on different machines forget each other. This template gives them:
 
@@ -34,7 +32,7 @@ Agents on different machines forget each other. This template gives them:
 
 ---
 
-## Architecture / 架构
+## Architecture
 
 ```mermaid
 flowchart TB
@@ -73,35 +71,30 @@ collector ◄──ssh inbox──  server-* / server-workstation
 
 ---
 
-## Quick start / 快速开始
+## Quick start
 
-1. **Clone this template** into your own private (or public) memory repo.
-2. Copy `config.example.env` → `config.env` (gitignored). Fill placeholders:
-   - `SHARED_MEMORY_ROOT` — path to the Git checkout on the workstation
-   - `MEMORY_INBOX_*` / `MIRROR_ROOT_*` — per-host inbox & mirror paths
-   - `SSH_HOST_*` — SSH Host aliases from `~/.ssh/config` (never raw IPs in docs)
-3. Read **[AGENTS.md](AGENTS.md)** (all writers), **[SERVER.md](SERVER.md)** (server agents), **[COLLECTOR.md](COLLECTOR.md)** (collector).
-4. **Tell each of your agents** (profile / system prompt / Cursor rule) to follow AGENTS.md + install `skills/shared-memory-manager`; fill `config.env` before the first collect.
-5. Optionally install the skill: copy `skills/shared-memory-manager/` into your agent skills dir.
-6. On servers, point Cursor rules at the mirror: see `.cursor/rules/shared-memory.mdc`.
-7. Try the demos: `demo/hello-memory/` (minimal file shape) and `demo/acme-cli/` (matured project memory).
+1. **Clone** this template into your own private (or public) memory repo.
+2. **Point your agents** at this repo and the skill: tell each agent (profile / system prompt / Cursor rule / chat) to follow **[AGENTS.md](AGENTS.md)** and install `skills/shared-memory-manager`. On servers, also point them at **[SERVER.md](SERVER.md)** (and optionally `.cursor/rules/shared-memory.mdc`). On the collector host, point them at **[COLLECTOR.md](COLLECTOR.md)**.
+3. **Ask your agent** to create `config.env` from `config.example.env` and complete the placeholders for your machines (`SHARED_MEMORY_ROOT`, `MEMORY_INBOX_*` / `MIRROR_ROOT_*`, `SSH_HOST_*` — SSH Host aliases from `~/.ssh/config`, never raw IPs in docs). Supply only the facts the agent cannot discover.
+4. **Ask the collector agent** to run the first collect once `config.env` is ready.
+5. **Try the demos**: `demo/hello-memory/` (minimal file shape) and `demo/acme-cli/` (matured project memory).
 
 Do **not** put this repo inside a working project tree (agents may auto-load it as project context).
 
 ---
 
-## Memory effect / 使用后的记忆效果
+## Memory effect
 
-**English** · Without shared memory, each new agent re-discovers the same pitfalls and paths. With this skill + collector, durable conclusions land in each project's `SUMMARY.md`. Saying 「读共享记忆」 on a *new* agent loads `MEMORY.md` → relevant `SUMMARY.md` → only then `events/` — so they inherit decisions, key paths, and pitfalls instead of starting from zero. See **`demo/acme-cli/`** for what a matured project memory looks like after a few days of cross-host use; **`demo/hello-memory/`** is only the minimal file shape.
-
-**中文** · 没有共享记忆时，每个新 agent 都会重新踩同一批坑、重新找同一批路径。启用本 skill + collector 后，持久结论会落入各项目的 `SUMMARY.md`。在新 agent 上说「读共享记忆」时，按 `MEMORY.md` → 相关 `SUMMARY.md` → 必要时才开 `events/` 的顺序加载，从而继承已有决定、关键路径与踩坑记录。具体长什么样见 **`demo/acme-cli/`**（跨工作站 + 服务器用了几天后的样子）；**`demo/hello-memory/`** 只演示最小文件形态。
+Without shared memory, each new agent re-discovers the same pitfalls and paths. With this skill + collector, durable conclusions land in each project's `SUMMARY.md`. Saying 「读共享记忆」 on a *new* agent loads `MEMORY.md` → relevant `SUMMARY.md` → only then `events/` — so they inherit decisions, key paths, and pitfalls instead of starting from zero. See **`demo/acme-cli/`** for what a matured project memory looks like after a few days of cross-host use; **`demo/hello-memory/`** is only the minimal file shape.
 
 ---
 
-## Repository layout / 目录
+## Repository layout
 
 ```
 .
+├── README.md              # English
+├── README.zh.md           # Chinese
 ├── AGENTS.md              # Universal read/write rules
 ├── SERVER.md              # Server agents: inbox write + read-only mirror
 ├── COLLECTOR.md           # Collect · denoise · weekly digest
@@ -121,19 +114,20 @@ Do **not** put this repo inside a working project tree (agents may auto-load it 
 
 ---
 
-## Security / 安全声明
+## Security
 
 - **Never store** tokens, passwords, API keys, private keys, session cookies, or raw credentials in memory files.
 - Paths may be recorded as *locations of artifacts*; secrets stay in password managers / env / secret stores.
 - Before publishing or opening a PR, run the checks in **[DESENSITIZE.md](DESENSITIZE.md)**.
-- This OSS template uses only placeholders (`YOUR_GITHUB_USER`, `workstation`, `server-a`, `$SHARED_MEMORY_ROOT`, …). Replace them locally; do not commit real hostnames, IPs, or account names to public forks.
+- This OSS template uses only placeholders (`YOUR_GITHUB_USER`, `workstation`, `server-a`, `$SHARED_MEMORY_ROOT`, …). When instructed, **agents** replace them in local `config.env`; do not commit real hostnames, IPs, or account names to public forks.
 
 ---
 
-## Docs map / 文档地图
+## Docs map
 
 | File | Audience |
 |------|----------|
+| [README.md](README.md) / [README.zh.md](README.zh.md) | Humans & agents — English / Chinese overview |
 | [AGENTS.md](AGENTS.md) | Every agent that reads or writes memory |
 | [SERVER.md](SERVER.md) | Server agents on remote hosts |
 | [COLLECTOR.md](COLLECTOR.md) | The collector agent on the workstation |

@@ -10,9 +10,9 @@ device: workstation
 
 # 收取流程 / Collector Playbook
 
-> **Template note** · Host names below (`server-a`, `server-b`, `server-workstation`, `jump-a`) are placeholders. Wire **your** SSH Host aliases and paths in local `config.env` before the first collect — see [README.md](README.md) **This is a TEMPLATE**.
+> **Template note** · Host names below (`server-a`, `server-b`, `server-workstation`, `jump-a`) are placeholders. **Tell your collector agent** to wire SSH Host aliases and paths in local `config.env` before the first collect — see [README.md](README.md) / [README.zh.md](README.zh.md) **This is a TEMPLATE**.
 >
-> **模板说明** · 下文主机名均为占位符。首次收取前请在本地 `config.env` 填入你自己的 SSH Host 别名与路径——见 [README.md](README.md)「这是一份模板」。
+> **模板说明** · 下文主机名均为占位符。请**告诉你的 collector / 收取端 agent** 在首次收取前于本地 `config.env` 填入 SSH Host 别名与路径——见 [README.md](README.md) / [README.zh.md](README.zh.md)「这是一份模板」。
 
 在 **workstation**（或你指定的 collector 主机）上运行。主机与路径全部使用占位符 / 环境变量（见 `config.example.env`）。
 
